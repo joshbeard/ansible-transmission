@@ -1,0 +1,4 @@
+transmission_user: "_transmission"
+transmission_group: "_transmission"
+transmission_package_name: transmission
+transmission_service_name: transmission_daemon

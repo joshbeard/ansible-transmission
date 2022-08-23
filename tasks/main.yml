@@ -1,15 +1,26 @@
 ---
+- name: OS Variables
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ansible_distribution}}.yml'
+        - '{{ansible_os_family}}.yml'
+        - default.yaml
+      paths:
+        - 'vars'
+
 # Installation
 - name: Install Transmission
-  apt:
-    name: transmission-daemon
+  ansible.builtin.package:
     state: present
+    name: "{{ transmission_package_name }}"
   tags: transmission
 
 # Configuration
 - name: Make sure transmission is not running
-  service:
-    name: transmission-daemon
+  ansible.builtin.service:
+    name: "{{ transmission_service_name }}"
     state: stopped
   ignore_errors: true
   tags: transmission
@@ -79,6 +90,7 @@
     path: "/etc/systemd/system/transmission-daemon.service.d"
     state: directory
     mode: 0755
+  when: ansible_os_family == "Debian"
   tags: transmission
 
 - name: "Change transmission-daemon systemd user"
@@ -87,6 +99,7 @@
     section: Service
     option: User
     value: "{{ transmission_user }}"
+  when: ansible_os_family == "Debian"
   notify: reload systemd
   tags: transmission
 
@@ -96,6 +109,7 @@
     section: Service
     option: Group
     value: "{{ transmission_group }}"
+  when: ansible_os_family == "Debian"
   notify: reload systemd
   tags: transmission
 
@@ -103,8 +117,8 @@
 
 # Service start
 - name: Start transmission
-  service:
-    name: transmission-daemon
+  ansible.builtin.service:
+    name: "{{ transmission_service_name }}"
     state: started
   ignore_errors: true
   tags: transmission

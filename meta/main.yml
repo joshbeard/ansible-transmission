@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Òscar Casajuana
-  description: Transmission for debian based systems
+  description: Transmission BitTorrent Software
   license: MIT
   min_ansible_version: 1.4
   platforms:
@@ -16,6 +16,9 @@ galaxy_info:
         - jessie
         - stretch
         - buster
+    - name: OpenBSD
+      versions:
+        - all
   categories:
     - networking
 dependencies: []

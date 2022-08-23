@@ -9,7 +9,7 @@ Ansible role for installing and configuring [Transmission](http://www.transmissi
 Requirements
 ------------
 
-Debian based system.
+Developed and tested on Debian based systems and OpenBSD.
 
 Installing
 ----------
@@ -24,6 +24,9 @@ Variables
 ---------
 
 There are no mandatory variables.
+
+See [`defaults/main.yml`](defaults/main.yml) for common defaults and
+[`vars/`](vars/) for OS-specific variables.
 
 ### Web interface & RPC
 
