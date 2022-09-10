@@ -1,5 +1,5 @@
-transmission_user: "debian-transmission"
-transmission_group: "debian-transmission"
+transmission_user: "transmission"
+transmission_group: "transmission"
 transmission_package_name: transmission-daemon
 transmission_service_name: transmission-daemon
 use_systemd: true

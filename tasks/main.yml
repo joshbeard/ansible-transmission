@@ -90,7 +90,7 @@
     path: "/etc/systemd/system/transmission-daemon.service.d"
     state: directory
     mode: 0755
-  when: ansible_os_family == "Debian"
+  when: use_systemd
   tags: transmission
 
 - name: "Change transmission-daemon systemd user"
@@ -99,7 +99,7 @@
     section: Service
     option: User
     value: "{{ transmission_user }}"
-  when: ansible_os_family == "Debian"
+  when: use_systemd
   notify: reload systemd
   tags: transmission
 
@@ -109,7 +109,7 @@
     section: Service
     option: Group
     value: "{{ transmission_group }}"
-  when: ansible_os_family == "Debian"
+  when: use_systemd
   notify: reload systemd
   tags: transmission
 

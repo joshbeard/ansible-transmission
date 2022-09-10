@@ -4,3 +4,4 @@
   systemd:
     name: transmission-daemon.service
     daemon_reload: yes
+  when: use_systemd
